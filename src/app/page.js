@@ -10,7 +10,7 @@ export default function Home() {
           small monetary support from their audience via a simple, shareable
           profile page — inspired by 'Buy Me a Coffee.
         </div>
-        <div className="buttons">
+        <div className="buttons gap-4 pt-3 flex">
           <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 border-0 rounded-xl">Start now</button>
           <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 border-0 rounded-xl">Raad More</button>
         </div>
