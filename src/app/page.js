@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <div className="uppebody flex flex-col h-[35vh] justify-center items-center">
         <div className="title text-5xl font-bold"> Get Me a Chai</div>
-        <div className="text-gray-300 pt-3 py-5">
+        <div className="text-slate-400 pt-3 py-5">
           Get-Me-A-Chai is a Next.js-based platform where creators can receive
           small monetary support from their audience via a simple, shareable
           profile page — inspired by 'Buy Me a Coffee.
@@ -29,11 +29,11 @@ export default function Home() {
         <div className="border-t border-indigo-100/40 max-w-6xl mx-auto"></div>
 
         <div className="max-w-6xl mx-auto px-6 py-10">
-          <h2 className="text-white text-3xl md:text-4xl font-bold text-center mb-16">
+          <h2 className="text-white text-3xl md:text-4xl font-bold text-center mb-12">
             Your Fans can buy you a Chai
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 - Laptop / Work */}
             <div className="flex flex-col items-center text-center">
               <div className="w-28 h-28 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6">
