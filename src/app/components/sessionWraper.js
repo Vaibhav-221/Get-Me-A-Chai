@@ -2,7 +2,7 @@
 import React from 'react'
 import { SessionProvider } from "next-auth/react"
 
-const sessionWraper = ({children}) => {
+const SessionWraper = ({children}) => {
   return (
      <SessionProvider>
       {children}
@@ -11,5 +11,4 @@ const sessionWraper = ({children}) => {
     
   )
 }
-
-export default sessionWraper
+export default SessionWraper

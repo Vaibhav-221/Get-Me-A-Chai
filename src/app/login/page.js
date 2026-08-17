@@ -1,6 +1,11 @@
+"use client"
 import React from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 const page = () => {
+  const { data: session } = useSession()
+
   return (
     <>
      <div className="flex flex-col items-center justify-center min-h-[70vh] px-4">
@@ -43,7 +48,8 @@ const page = () => {
 
           {/* GitHub */}
           <button
-            type="button"
+            type="button" onClick={() => {signIn("github")}
+            }
             className="flex items-center justify-center gap-3 w-full text-white bg-white/5 border border-indigo-500/20 hover:bg-white/10 hover:border-indigo-500/40 rounded-xl px-4 py-3 text-sm font-medium transition-colors"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
