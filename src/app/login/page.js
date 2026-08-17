@@ -4,6 +4,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 const page = () => {
   const { data: session } = useSession();
+  
 
   return (
     <>
