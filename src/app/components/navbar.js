@@ -1,8 +1,10 @@
 "use client";
 import { signOut, useSession, signIn } from "next-auth/react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [dropdown, setdropdown] = useState(false);
   const { data: session } = useSession();
   return (
     <>
@@ -12,6 +14,87 @@ export default function Navbar() {
         </Link>
 
         <div className="flex gap-6 items-center">
+          {session && (
+            <>
+              
+            <div className="relative">
+  <button
+    onClick={() => setdropdown(!dropdown)}
+    id="dropdownDefaultButton"
+    className="inline-flex items-center justify-center gap-1.5 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:from-purple-500 hover:to-blue-400 border border-transparent focus:ring-4 focus:ring-indigo-500/40 shadow-md font-medium leading-5 rounded-xl text-sm px-4 py-2.5 focus:outline-none transition-all"
+    type="button"
+  >
+    Dropdown button
+    <svg
+      className={`w-4 h-4 transition-transform duration-200 ${dropdown ? "rotate-180" : ""}`}
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m19 9-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  <div
+    id="dropdown"
+    className={`absolute right-0 mt-2 z-20 origin-top-right transition-all duration-150 ${
+      dropdown
+        ? "opacity-100 scale-100 pointer-events-auto"
+        : "opacity-0 scale-95 pointer-events-none"
+    } bg-[#0a0e1f] border border-indigo-500/20 rounded-xl shadow-xl shadow-black/40 w-44`}
+  >
+    <ul
+      className="p-2 text-sm text-gray-200 font-medium"
+      aria-labelledby="dropdownDefaultButton"
+    >
+      <li>
+        
+         <a href="#"
+          className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-indigo-500/10 hover:text-white transition-colors"
+        >
+          Dashboard
+        </a>
+      </li>
+      <li>
+        
+         <a href="#"
+          className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-indigo-500/10 hover:text-white transition-colors"
+        >
+          Settings
+        </a>
+      </li>
+      <li>
+        
+         <a href="#"
+          className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-indigo-500/10 hover:text-white transition-colors"
+        >
+          Earnings
+        </a>
+      </li>
+      <li className="border-t border-indigo-500/10 mt-1 pt-1">
+        
+         <a href="#"
+          onClick={() => signOut()}
+          className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-red-500/10 hover:text-red-400 transition-colors cursor-pointer"
+        >
+          Sign out
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+            </>
+          )}
+
           {session && (
             <Link href="Dashboard">
               <button
