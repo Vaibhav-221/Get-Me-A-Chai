@@ -1,9 +1,18 @@
 "use client";
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const page = () => {
   const { data: session } = useSession();
+  const route = useRouter()
+
+   useEffect(() => {
+    if (session) {
+      router.push("/Dashboard");
+    }
+  }, [session, router])
   
 
   return (
