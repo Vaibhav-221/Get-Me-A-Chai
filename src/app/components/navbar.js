@@ -58,11 +58,11 @@ export default function Navbar() {
     >
       <li>
         
-         <a href="#"
+         <Link href="Dashboard"
           className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-indigo-500/10 hover:text-white transition-colors"
         >
           Dashboard
-        </a>
+        </Link>
       </li>
       <li>
         
@@ -95,16 +95,7 @@ export default function Navbar() {
             </>
           )}
 
-          {session && (
-            <Link href="Dashboard">
-              <button
-                type="button"
-                className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 border-0 rounded-xl"
-              >
-                Dashboard
-              </button>
-            </Link>
-          )}
+          
           {session && (
             <button
               type="button"
