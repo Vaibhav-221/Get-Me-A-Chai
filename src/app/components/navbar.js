@@ -44,7 +44,10 @@ export default function Navbar() {
                 </button>
 
                 <div
-                  id="dropdown"
+                  id="dropdown" onBlur={() => {setdropdown(false)
+                    
+                  }
+                  }
                   className={`absolute right-0 mt-2 z-20 origin-top-right transition-all duration-150 ${
                     dropdown
                       ? "opacity-100 scale-100 pointer-events-auto"
