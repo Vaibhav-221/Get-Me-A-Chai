@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Username = (params) => {
+const Username = ({params}) => {
   return (
     <div>
       {params.username}
