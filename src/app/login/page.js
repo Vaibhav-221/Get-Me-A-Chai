@@ -6,13 +6,14 @@ import { useEffect } from "react";
 
 const page = () => {
   const { data: session } = useSession();
-  const route = useRouter()
+  const router = useRouter()
 
    useEffect(() => {
     if (session) {
       router.push("/Dashboard");
     }
-  }, [session, router])
+  }, [ session, router])
+
   
 
   return (
