@@ -19,7 +19,7 @@ const userSchema = new Schema({
 
   }, coverpic: {
     type: String,
-
+  },
     createdAt: {
     type: Date,
     default: Date.now
