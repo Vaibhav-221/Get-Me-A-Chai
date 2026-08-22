@@ -12,14 +12,14 @@ const userSchema = new Schema({
     unique: true
   }, username:{
     type: String,
-    required: true,
+  
     unique: true
   }, profilepic: {
     type: String,
-    required: true
+
   }, coverpic: {
     type: String,
-    required: true},
+
     createdAt: {
     type: Date,
     default: Date.now
