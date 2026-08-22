@@ -3,6 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import mongoose from "mongoose";
 import User from "@/app/Model/User";
 import Payment from "@/app/Model/payment";
+import connectDB from "@/app/db/connectdb";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -13,7 +14,7 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-
+  
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "github") {
