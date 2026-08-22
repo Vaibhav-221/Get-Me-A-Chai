@@ -1,5 +1,8 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
+import mongoose from "mongoose"
+import User from "@/app/Model/User"
+import Payment from "@/app/Model/payment"
 
 export const authOptions = {
   // Configure one or more authentication providers
