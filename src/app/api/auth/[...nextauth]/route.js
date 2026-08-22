@@ -31,8 +31,7 @@ export const authOptions = {
       }
       return true;
     },
-  },
-  callbacks: {
+
     async session({ session, token, user }) {
       const dbUser = await User.findOne({ email: session.user.email });
       console.log(dbUser);
