@@ -14,7 +14,7 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  
+
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "github") {
@@ -33,9 +33,9 @@ export const authOptions = {
     },
     callbacks: {
       async session({ session, token, user }) {
-       const currentUser = await User.findOne({ email: session.user.email });
-       console.log(currentUser);
-       session.user.name = currentUser.username;
+       const dbUser = await User.findOne({ email: session.user.email });
+       console.log(dbUser);
+       session.user.name = dbUser.username;
         return session;
       },
     },

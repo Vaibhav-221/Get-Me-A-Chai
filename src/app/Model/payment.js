@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-const {schema, model} = mongoose;
+const {Schema, model} = mongoose;
 
-const paymentSchema = new schema({
+const paymentSchema = new Schema({
     name: {
         type: String,
         required: true
