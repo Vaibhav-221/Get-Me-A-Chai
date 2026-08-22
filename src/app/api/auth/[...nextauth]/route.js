@@ -19,11 +19,11 @@ export const authOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "github") {
         await connectDB();
-        const currentUser = await User.findOne({ email: email });
+        const currentUser = await User.findOne({ email: user.email });
         if (!currentUser) {
           const newUser = await User.create({
             name: user.name,
-            username: username.split("@")[0],
+            username: user.email.split("@")[0],
           });
         } else {
           user.name = currentUser.username;
@@ -31,15 +31,16 @@ export const authOptions = {
       }
       return true;
     },
-    callbacks: {
-      async session({ session, token, user }) {
-       const dbUser = await User.findOne({ email: session.user.email });
-       console.log(dbUser);
-       session.user.name = dbUser.username;
-        return session;
-      },
+  },
+  callbacks: {
+    async session({ session, token, user }) {
+      const dbUser = await User.findOne({ email: session.user.email });
+      console.log(dbUser);
+      session.user.name = dbUser.username;
+      return session;
     },
   },
 };
 
-export { authOptions as GET, authOptions as POST };
+const handler = NextAuth(authOptions); // handler is now a function
+export { handler as GET, handler as POST };
