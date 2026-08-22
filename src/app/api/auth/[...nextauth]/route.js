@@ -10,7 +10,19 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  
+callbacks: {
+  async signIn({ user, account, profile, email, credentials }) {
+  if (account.provider === "github") {
+    const client = await mongoose.connect(process.env.MONGO_URI)
+  }
+    return true
+  }
 }
 
-const handler = NextAuth(authOptions)
-export {handler as GET, handler as POST}
+}
+
+
+
+
+export { authOptions as GET, authOptions as POST }
