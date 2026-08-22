@@ -1,0 +1,30 @@
+import mongoose from "mongoose";
+const {schema, model} = mongoose;
+
+const paymentSchema = new schema({
+    name: {
+        type: String,
+        required: true
+    },to_user: {
+        type: String,
+        required: true 
+    },oid: {
+        type: String,
+        required: true
+    },amount: {
+        type: Number,
+        required: true 
+    },message: {
+        type: String,
+        required: true
+    },createdAt: {
+        type: Date,
+        default: Date.now
+    },updatedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Payment = model("Payment", paymentSchema);
+export default mongoose.models.Payment || Payment;
