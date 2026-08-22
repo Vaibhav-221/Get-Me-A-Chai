@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
 
 const connectDb = async () => {
+  if (mongoose.connection.readyState >= 1) {
+    return; // already connected
+  }
   try {
-    const conn = await mongoose.connect("mongodb://localhost:27017/Chai");
+    const conn = await mongoose.connect("mongodb://localhost:27017/chai");
     console.log(`MongoDB Connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
