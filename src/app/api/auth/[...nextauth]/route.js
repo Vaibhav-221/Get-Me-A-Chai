@@ -1,41 +1,73 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import mongoose from "mongoose";
 import User from "@/app/Model/User";
-import Payment from "@/app/Model/payment";
 import connectDB from "@/app/db/connectdb";
 
+const buildGithubUserData = (user, profile) => {
+  const email =
+    user?.email ||
+    profile?.email ||
+    `${profile?.login || user?.name || "github-user"}@github.local`;
+
+  const usernameBase =
+    (user?.name || profile?.login || "github-user")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "github-user";
+
+  return {
+    name: user?.name || profile?.login || "GitHub User",
+    email,
+    username: usernameBase,
+  };
+};
+
 export const authOptions = {
-  // Configure one or more authentication providers
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    // ...add more providers here
   ],
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      if (account.provider === "github") {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "github") {
         await connectDB();
-        const currentUser = await User.findOne({ email: user.email });
+
+        const githubUser = buildGithubUserData(user, profile);
+        let currentUser = await User.findOne({
+          $or: [{ email: githubUser.email }, { username: githubUser.username }],
+        });
+
         if (!currentUser) {
-          const newUser = await User.create({
-            name: user.name,
-            username: user.email.split("@")[0],
+          currentUser = await User.create({
+            name: githubUser.name,
+            email: githubUser.email,
+            username: githubUser.username,
           });
         } else {
-          user.name = currentUser.username;
+          currentUser.name = currentUser.name || githubUser.name;
+          currentUser.email = currentUser.email || githubUser.email;
+          currentUser.username = currentUser.username || githubUser.username;
+          await currentUser.save();
         }
+
+        user.email = currentUser.email;
+        user.name = currentUser.username || currentUser.name;
       }
+
       return true;
     },
 
-    async session({ session, token, user }) {
+    async session({ session }) {
+      if (!session?.user?.email) return session;
+
       const dbUser = await User.findOne({ email: session.user.email });
-      console.log(dbUser);
-      session.user.name = dbUser.username;
+      if (!dbUser) return session;
+
+      session.user.name = dbUser.username || dbUser.name;
       return session;
     },
   },
