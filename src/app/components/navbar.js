@@ -68,20 +68,13 @@ export default function Navbar() {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href={`/${session.user.name}`}
                         className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-indigo-500/10 hover:text-white transition-colors"
                       >
-                        Settings
+                        Your Profile
                       </a>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-indigo-500/10 hover:text-white transition-colors"
-                      >
-                        Earnings
-                      </a>
-                    </li>
+                   
                     <li className="border-t border-indigo-500/10 mt-1 pt-1">
                       <a
                         href="#"
