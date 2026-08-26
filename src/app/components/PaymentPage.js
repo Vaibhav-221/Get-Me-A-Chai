@@ -98,20 +98,20 @@ var rzp1 = new Razorpay(options);
             <div className="space-y-3">
               {/* Name input */}
               <input
-                placeholder="Enter Name" onchange={()=> handleChange}
+                placeholder="Enter Name" onchange={()=> handleChange} value={paymentform.name}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Message input */}
               <input
-                placeholder="Enter Message"
+                placeholder="Enter Message" onchange={()=> handleChange} value={paymentform.message}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Amount input */}
               <input
                 placeholder="Enter Amount"
-                type="number"
+                type="number" onchange={()=> handleChange} vlaue={paymentform.amount}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
