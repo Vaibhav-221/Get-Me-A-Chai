@@ -31,7 +31,6 @@ const PaymentPage = ({username}) => {
 };
 var rzp1 = new Razorpay(options);
     rzp1.open();
-    e.preventDefault();
 
 
 
@@ -121,19 +120,19 @@ var rzp1 = new Razorpay(options);
                   
                 }
                 } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
-                  Pay $10
+                  Pay ₹10
                 </button>
                 <button onClick={() => {pay(1000, )
                   
                 }
                 } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
-                  Pay $20
+                  Pay ₹20
                 </button>
                 <button onClick={() => {pay(1000, )
                   
                 }
                 } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
-                  Pay $30
+                  Pay ₹30
                 </button>
               </div>
             </div>
