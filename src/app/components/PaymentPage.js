@@ -8,7 +8,8 @@ const PaymentPage = ({username}) => {
 
 
   const pay =(amount, orderId) => {
-    let a = await initiate(amount, username);
+    let a = await initiate(amount, session?user.name, paymentform);
+    const orderId = a.order.id;
 
 
 
