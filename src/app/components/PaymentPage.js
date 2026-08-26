@@ -11,11 +11,11 @@ const PaymentPage = ({username}) => {
     "key": process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
     "amount": amount, // Amount is in currency subunits. 
     "currency": "INR",
-    "name": "Acme Corp", //your business name
+    "name": `Get Me A Chai - ${username}`, //your business name
     "description": "Test Transaction",
     "image": "https://example.com/your_logo",
-    "order_id": "order_9A33XWu170gUtm", // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    "order_id": orderId, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": `${process.env.URL}/api/razorpay`, //This is the callback URL where the payment response will be sent
     "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
         "name": "Gaurav Kumar", //your customer's name
         "email": "gaurav.kumar@example.com",
