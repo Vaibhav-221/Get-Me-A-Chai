@@ -1,1 +1,30 @@
 "use server"
+
+import Razorpay from "razorpay"
+import payment from "@/app/Model/payment"
+import connectDb from "@/app/db/connectdb"
+import User from "@/Model/user"
+
+export const initiate = async (amount, to_username, paymentform) => {
+    await connectDb()
+
+var instance = new Razorpay({ key_id: 'process.env.API_KEY', key_secret: 'process.env.KEY_SECRET' })
+
+
+let options = {
+    amount: Number.parseInt(amount),
+    currency: "INR",
+}
+
+let x = await instance.orders.create(options)
+
+await Payment.create({
+    orderId: x.id,
+    amount: x.amount,
+    to_username: x.to_username,
+    name: paymentform.name,
+    message: paymentform.message,
+})
+
+return x
+}
