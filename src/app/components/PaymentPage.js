@@ -98,7 +98,7 @@ var rzp1 = new Razorpay(options);
             <div className="space-y-3">
               {/* Name input */}
               <input
-                placeholder="Enter Name"
+                placeholder="Enter Name" onchange={()=> handleChange}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
