@@ -117,13 +117,22 @@ var rzp1 = new Razorpay(options);
 
               {/* Quick-pay preset buttons */}
               <div className="flex flex-col xs:flex-row gap-2 pt-1 sm:flex-row">
-                <button className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
+                <button onClick={() => {pay(1000, )
+                  
+                }
+                } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
                   Pay $10
                 </button>
-                <button className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
+                <button onClick={() => {pay(1000, )
+                  
+                }
+                } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
                   Pay $20
                 </button>
-                <button className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
+                <button onClick={() => {pay(1000, )
+                  
+                }
+                } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
                   Pay $30
                 </button>
               </div>
