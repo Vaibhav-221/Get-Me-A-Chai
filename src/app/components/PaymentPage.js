@@ -9,8 +9,9 @@ import { useState } from "react";
 
 const PaymentPage = ({username}) => {
   const [paymentform, setPaymentForm] = useState({ });
+  const { data: session } = useSession();
 
-  
+
 
 
 
