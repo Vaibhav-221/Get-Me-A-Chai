@@ -1,7 +1,7 @@
 "use server";
 import React from "react";
 
-const PaymentPage = () => {
+const PaymentPage = ({username}) => {
   return (
     <>
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -18,7 +18,7 @@ const PaymentPage = () => {
 
         {/* ===== Creator Info ===== */}
         <div className="text-center mt-4 px-4">
-          <h1 className="text-xl sm:text-2xl font-bold"> {params.username} </h1>
+          <h1 className="text-xl sm:text-2xl font-bold"> {username} </h1>
           <p className="text-gray-400 mt-1 text-sm sm:text-base">
             Creator bio goes here
           </p>
