@@ -42,6 +42,14 @@ var rzp1 = new Razorpay(options);
 
 
   }
+
+  const handleChange = (e) => {
+    setPaymentForm({
+      ...paymentform,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   return (
     <>
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
