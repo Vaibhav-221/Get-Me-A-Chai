@@ -1,10 +1,15 @@
 "use server";
 import React from "react";
+import Razorpay from "razorpay";
+import { initiate } from "../../../actions/useractions";
+
 
 const PaymentPage = ({username}) => {
 
 
   const pay =(amount, orderId) => {
+    let a = await initiate(amount, username);
+
 
 
     var options = {
