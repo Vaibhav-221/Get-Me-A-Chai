@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import React from "react";
 import Razorpay from "razorpay";
 import { initiate } from "../../../actions/useractions";
@@ -16,8 +16,8 @@ const PaymentPage = ({username}) => {
 
 
   const pay =(amount, orderId) => {
-    let a = await initiate(amount, session?user.name, paymentform)
-    const options
+    let a = await initiate(amount, session?.user.name, paymentform);
+    let orderId = a.orderId;
     
 
 
@@ -115,20 +115,20 @@ var rzp1 = new Razorpay(options);
             <div className="space-y-3">
               {/* Name input */}
               <input
-                placeholder="Enter Name" onchange={()=> handleChange} value={paymentform.name}
+                placeholder="Enter Name" onchange={handleChange} value={paymentform.name}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Message input */}
               <input
-                placeholder="Enter Message" onchange={()=> handleChange} value={paymentform.message}
+                placeholder="Enter Message" onchange={handleChange} value={paymentform.message}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Amount input */}
               <input
                 placeholder="Enter Amount"
-                type="number" onchange={()=> handleChange} vlaue={paymentform.amount}
+                type="number" onchange={handleChange} value={paymentform.amount}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
