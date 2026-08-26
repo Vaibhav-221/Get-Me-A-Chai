@@ -1,7 +1,7 @@
 "use server"
 
 import Razorpay from "razorpay"
-import payment from "@/app/Model/payment"
+import Payment from "@/app/Model/payment"
 import connectDb from "@/app/db/connectdb"
 import User from "@/Model/user"
 
