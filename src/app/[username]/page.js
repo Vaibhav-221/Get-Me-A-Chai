@@ -1,8 +1,9 @@
 import React from 'react'
+import PaymentPage from '../components/PaymentPage'
 
 const UserProfile = ({params}) => {
   return (
-    // Page wrapper
+<PaymentPage username={params.username} />
     
   );
 };
