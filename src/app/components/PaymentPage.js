@@ -8,17 +8,16 @@ import { useState } from "react";
 
 const PaymentPage = ({username}) => {
   const [paymentform, setPaymentForm] = useState({ });
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
 
 
 
 
   const pay = async (amount) => {
-    let a = await initiate(amount, session?.user.name, paymentform);
+    let a = await initiate(amount, username, paymentform);
     let orderId = a.orderId;
     
-
 
 
     var options = {
@@ -114,20 +113,20 @@ var rzp1 = new Razorpay(options);
             <div className="space-y-3">
               {/* Name input */}
               <input
-                placeholder="Enter Name" onchange={handleChange} value={paymentform.name}
+                placeholder="Enter Name" onChange={handleChange} value={paymentform.name}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Message input */}
               <input
-                placeholder="Enter Message" onchange={handleChange} value={paymentform.message}
+                placeholder="Enter Message" onChange={handleChange} value={paymentform.message}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Amount input */}
               <input
                 placeholder="Enter Amount"
-                type="number" onchange={handleChange} value={paymentform.amount}
+                type="number" onChange={handleChange} value={paymentform.amount}
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
@@ -144,13 +143,13 @@ var rzp1 = new Razorpay(options);
                 } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
                   Pay ₹10
                 </button>
-                <button onClick={() => {pay(1000, )
+                <button onClick={() => {pay(2000, )
                   
                 }
                 } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
                   Pay ₹20
                 </button>
-                <button onClick={() => {pay(1000, )
+                <button onClick={() => {pay(3000, )
                   
                 }
                 } className="flex-1 bg-[#0f172a] border border-violet-800 rounded-md py-1.5 text-sm hover:bg-violet-900/40 transition">
