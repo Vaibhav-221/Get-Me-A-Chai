@@ -130,10 +130,10 @@ var rzp1 = new Razorpay(options);
                 <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-sm shrink-0">
                   A
                 </div>
-                {payment.map((p , index) => {
-                  return <p className="text-sm text-gray-300">
-                  <span className="font-semibold text-white">{p.name}</span> donated{p.amount}
-                  <span className="text-violet-400">$0</span> — "{p.message}"
+                {payments.map((p , index) => {
+                  return <p key={index} className="text-sm text-gray-300">
+                  <span className="font-semibold text-white">{p.name} </span> donated {p.amount}
+                  <span> with the message </span> — "{p.message}"
                 </p>
                 })}
                 
