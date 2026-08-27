@@ -10,16 +10,11 @@ const PaymentPage = ({username}) => {
   const [paymentform, setPaymentForm] = useState({ });
   // const { data: session } = useSession();
 
-
-
-
-
   const pay = async (amount) => {
+    console.log("Payment initiated for amount:", amount, "by user:", username);
     let a = await initiate(amount, username, paymentform);
     let orderId = a.orderId;
     
-
-
     var options = {
     "key": process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
     "amount": amount, // Amount is in currency subunits. 
