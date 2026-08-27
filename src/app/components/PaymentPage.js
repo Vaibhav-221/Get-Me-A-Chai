@@ -2,12 +2,16 @@
 import React from "react";
 import { initiate } from "../../../actions/useractions";
 import { useEffect, useState } from "react";
+import {fetchuser, fetchpayments } from "../../../actions/useractions";
 
 
 const PaymentPage = ({username}) => {
   const [paymentform, setPaymentForm] = useState({ });
   const [razorpayReady, setRazorpayReady] = useState(false);
   const [paymentError, setPaymentError] = useState("");
+  const [currentuser, setcurrentuser] = useState({});
+  const [payments, setpayments] = useState([]);
+  
 
   useEffect(() => {
     if (window.Razorpay) {
@@ -77,6 +81,17 @@ var rzp1 = new Razorpay(options);
     });
   }
 
+  const getData = async () => {
+    let u = await fetchuser(username)
+    setcurrentuser(u)
+    let dbpayments = await fetchpayments(username)
+    setpayments(dbpayments)
+    console.log(u, dbpayments)
+  }
+  useEffect(() => {
+  getData();
+}, [username]);
+
   return (
     <>
       <div className="min-h-screen bg-[#0f172a] text-white">
@@ -115,10 +130,13 @@ var rzp1 = new Razorpay(options);
                 <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-sm shrink-0">
                   A
                 </div>
-                <p className="text-sm text-gray-300">
-                  <span className="font-semibold text-white">Name</span> donated{" "}
-                  <span className="text-violet-400">$0</span> — "message"
+                {payment.map((p , index) => {
+                  return <p className="text-sm text-gray-300">
+                  <span className="font-semibold text-white">{p.name}</span> donated{p.amount}
+                  <span className="text-violet-400">$0</span> — "{p.message}"
                 </p>
+                })}
+                
               </div>
             </div>
           </div>
