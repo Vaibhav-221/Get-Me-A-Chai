@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Razorpay from "razorpay";
 import { initiate } from "../../../actions/useractions";
 import useSession from "next-auth/react";
 import { useState } from "react";
@@ -13,13 +12,14 @@ const PaymentPage = ({username}) => {
   const pay = async (amount) => {
     console.log("Payment initiated for amount:", amount, "by user:", username);
     let a = await initiate(amount, username, paymentform);
-    let orderId = a.orderId;
+    console.log("Client recieved:", a);
+    let orderId = a.id;
     
     var options = {
-    "key": process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
+    "key": a.key, // Enter the Key ID generated from the Dashboard
     "amount": amount, // Amount is in currency subunits. 
     "currency": "INR",
-    "name": `Get Me A Chai - ${username}`, //your business name
+    "name": "Get Me A Chai", //your business name
     "description": "Test Transaction",
     "image": "https://example.com/your_logo",
     "order_id": orderId, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -108,20 +108,20 @@ var rzp1 = new Razorpay(options);
             <div className="space-y-3">
               {/* Name input */}
               <input
-                placeholder="Enter Name" onChange={handleChange} value={paymentform.name}
+                placeholder="Enter Name" onChange={handleChange} value={paymentform.name} name="name"
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Message input */}
               <input
-                placeholder="Enter Message" onChange={handleChange} value={paymentform.message}
+                placeholder="Enter Message" onChange={handleChange} value={paymentform.message} name="message"
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Amount input */}
               <input
                 placeholder="Enter Amount"
-                type="number" onChange={handleChange} value={paymentform.amount}
+                type="number" onChange={handleChange} value={paymentform.amount} name="amount"
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
