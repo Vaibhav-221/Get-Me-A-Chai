@@ -2,7 +2,6 @@
 import React from "react";
 import Razorpay from "razorpay";
 import { initiate } from "../../../actions/useractions";
-import session from "express-session";
 import useSession from "next-auth/react";
 import { useState } from "react";
 
@@ -15,7 +14,7 @@ const PaymentPage = ({username}) => {
 
 
 
-  const pay =(amount, orderId) => {
+  const pay = async (amount) => {
     let a = await initiate(amount, session?.user.name, paymentform);
     let orderId = a.orderId;
     

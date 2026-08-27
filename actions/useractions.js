@@ -3,7 +3,6 @@
 import Razorpay from "razorpay"
 import Payment from "@/app/Model/payment"
 import connectDb from "@/app/db/connectdb"
-import User from "@/Model/user"
 
 export const initiate = async (amount, to_username, paymentform) => {
     await connectDb()
