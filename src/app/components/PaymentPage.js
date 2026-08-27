@@ -16,7 +16,7 @@ const PaymentPage = ({username}) => {
     let orderId = a.id;
     
     var options = {
-    "key": a.key, // Enter the Key ID generated from the Dashboard
+    "key": process.env.API_KEY, // Enter the Key ID generated from the Dashboard
     "amount": amount, // Amount is in currency subunits. 
     "currency": "INR",
     "name": "Get Me A Chai", //your business name
@@ -39,9 +39,6 @@ const PaymentPage = ({username}) => {
 };
 var rzp1 = new Razorpay(options);
     rzp1.open();
-
-
-
 
   }
 
