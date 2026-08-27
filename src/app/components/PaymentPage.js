@@ -1,22 +1,50 @@
 "use client";
 import React from "react";
 import { initiate } from "../../../actions/useractions";
-import useSession from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const PaymentPage = ({username}) => {
   const [paymentform, setPaymentForm] = useState({ });
-  // const { data: session } = useSession();
+  const [razorpayReady, setRazorpayReady] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
+
+  useEffect(() => {
+    if (window.Razorpay) {
+      setRazorpayReady(true);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.onload = () => setRazorpayReady(Boolean(window.Razorpay));
+    script.onerror = () => setRazorpayReady(false);
+    document.body.appendChild(script);
+
+    return () => script.remove();
+  }, []);
 
   const pay = async (amount) => {
+    if (!razorpayReady || !window.Razorpay) {
+      console.error("Razorpay checkout is not loaded");
+      return;
+    }
+
+    if (!paymentform.name?.trim() || !paymentform.message?.trim() || !Number.isFinite(amount) || amount <= 0) {
+      setPaymentError("Enter your name, a message, and a valid amount.");
+      return;
+    }
+
+    setPaymentError("");
+
     console.log("Payment initiated for amount:", amount, "by user:", username);
     let a = await initiate(amount, username, paymentform);
     console.log("Client recieved:", a);
     let orderId = a.id;
-    
+
     var options = {
-    "key": process.env.API_KEY, // Enter the Key ID generated from the Dashboard
+    "key": a.key, // Public Key ID generated from the Dashboard
     "amount": amount, // Amount is in currency subunits. 
     "currency": "INR",
     "name": "Get Me A Chai", //your business name
@@ -51,10 +79,9 @@ var rzp1 = new Razorpay(options);
 
   return (
     <>
-      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       <div className="min-h-screen bg-[#0f172a] text-white">
         {/* ===== Banner ===== */}
-        <div className="h-40 sm:h-52 md:h-64 w-full bg-gradient-to-r from-purple-700 via-violet-800 to-indigo-900" />
+        <div className="h-40 sm:h-52 md:h-64 w-full bg-linear-to-r from-purple-700 via-violet-800 to-indigo-900" />
 
         {/* ===== Avatar ===== */}
         <div className="flex justify-center -mt-12 sm:-mt-16">
@@ -106,24 +133,28 @@ var rzp1 = new Razorpay(options);
               {/* Name input */}
               <input
                 placeholder="Enter Name" onChange={handleChange} value={paymentform.name} name="name"
+                required
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Message input */}
               <input
                 placeholder="Enter Message" onChange={handleChange} value={paymentform.message} name="message"
+                required
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
               {/* Amount input */}
               <input
                 placeholder="Enter Amount"
-                type="number" onChange={handleChange} value={paymentform.amount} name="amount"
+                type="number" min="1" onChange={handleChange} value={paymentform.amount} name="amount" required
                 className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
               />
 
+              {paymentError && <p className="text-sm text-red-300" role="alert">{paymentError}</p>}
+
               {/* Pay button */}
-              <button className="w-full bg-gradient-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition">
+              <button type="button" disabled={!razorpayReady} onClick={() => pay(Number(paymentform.amount))} className="w-full bg-linear-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-50">
                 Pay
               </button>
 

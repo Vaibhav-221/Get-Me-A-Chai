@@ -25,5 +25,5 @@ await Payment.create({
     message: paymentform.message,
 })
 
-return x
+return {...x, key: process.env.API_KEY}
 }
