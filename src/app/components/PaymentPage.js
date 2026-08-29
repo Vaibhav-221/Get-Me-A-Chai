@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {fetchuser, fetchpayments } from "../../../actions/useractions";
 
 
+
 const PaymentPage = ({username}) => {
   const [paymentform, setPaymentForm] = useState({ });
   const [razorpayReady, setRazorpayReady] = useState(false);

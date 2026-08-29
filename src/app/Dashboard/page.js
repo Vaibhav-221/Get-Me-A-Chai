@@ -4,16 +4,39 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from 'react';
+import {fetchuser, userProfile} from "../../../actions/useractions";
 
 
 const Dashboard = () => {
+  const { data: session } = useSession();
   // Form state — holds all dashboard fields
   const [form, setForm] = useState({});
+
+  useEffect(() => {
+    if (!session) {
+            router.push('/login')
+        }
+        else {
+            getData()
+        }
+  }, [])
+  
+
+  const getData = async () => {
+        let u = await fetchuser(session.user.name)
+        setform(u)
+    }
 
   // Single handler for all inputs — uses name attribute to update correct field
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+  const handlesubmit = async (e) => {
+    update()
+    let a = await updateProfile(e, session.user.name)
+    alert("Profile Updated Successfully")
+
+  }
 
   return (
     <div className="min-h-screen bg-[#0f172a] text-white px-4 py-8">
@@ -22,7 +45,7 @@ const Dashboard = () => {
         Welcome to your Dashboard
       </h1>
 
-      <div className="max-w-xl mx-auto bg-[#1e1b4b]/60 border border-violet-900 rounded-xl p-4 sm:p-6 space-y-4">
+      <div className="max-w-xl mx-auto bg-[#1e1b4b]/60 border border-violet-900 rounded-xl p-4 sm:p-6 space-y-4" action={handlesubmit}>
 
         {/* Name */}
         <div>
@@ -67,11 +90,11 @@ const Dashboard = () => {
         <div>
           <label className="block text-sm mb-1">Profile Picture</label>
           <input
-            value={form.profile ? form.profile : ""}
+            value={form.profilepic ? form.profilepic : ""}
             onChange={handleChange}
             type="text"
             name="profilepic"
-            id="profile"
+            id="profilepic"
             className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
           />
         </div>
@@ -80,11 +103,11 @@ const Dashboard = () => {
         <div>
           <label className="block text-sm mb-1">Cover Picture</label>
           <input
-            value={form.cover ? form.cover : ""}
+            value={form.coverpic ? form.coverpic : ""}
             onChange={handleChange}
             type="text"
             name="coverpic"
-            id="cover"
+            id="coverpic"
             className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
           />
         </div>
