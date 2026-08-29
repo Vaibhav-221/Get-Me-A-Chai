@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from 'react';
 import {fetchuser, updateProfile} from "../../../actions/useractions";
+import "react-toastify/dist/ReactToastify.css";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 const Dashboard = () => {
