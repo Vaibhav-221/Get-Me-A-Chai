@@ -23,7 +23,7 @@ export default function Navbar() {
                   className="inline-flex items-center justify-center gap-1.5 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:from-purple-500 hover:to-blue-400 border border-transparent focus:ring-4 focus:ring-indigo-500/40 shadow-md font-medium leading-5 rounded-xl text-sm px-4 py-2.5 focus:outline-none transition-all cursor-pointer"
                   type="button"
                 >
-                   welcome {session.user.email}
+                   welcome {session.user.name}
                   <svg
                     className={`w-4 h-4 transition-transform duration-200 ${dropdown ? "rotate-180" : ""}`}
                     aria-hidden="true"
