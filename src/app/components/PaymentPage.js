@@ -93,6 +93,12 @@ const PaymentPage = ({ username }) => {
   useEffect(() => {
     getData();
   }, [username]);
+  const isInvalid =
+  !paymentform.name || paymentform.name.length < 3 ||
+  !paymentform.message || paymentform.message.length < 3 ||
+  !paymentform.amount || Number.parseInt(paymentform.amount) < 1
+
+const isDisabled = !razorpayReady || isInvalid
 
   return (
     <>
@@ -199,15 +205,18 @@ const PaymentPage = ({ username }) => {
               )}
 
               {/* Pay button */}
-              <button
-                type="button"
-                disabled={!razorpayReady}
-                onClick={() => pay(Number.parseInt(paymentform.amount) * 100)}
-                className="w-full bg-linear-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Pay
-              </button>
-
+             <button
+  type="button"
+  disabled={isDisabled}
+  onClick={() => pay(Number.parseInt(paymentform.amount) * 100)}
+  className={`w-full rounded-md py-2 font-semibold transition ${
+    isDisabled
+      ? "bg-linear-to-r from-red-600 to-blue-600 opacity-50 cursor-not-allowed"
+      : "bg-linear-to-r from-purple-600 to-violet-600 hover:opacity-90"
+  }`}
+>
+  Pay
+</button>
               {/* Quick-pay preset buttons */}
               <div className="flex flex-col xs:flex-row gap-2 pt-1 sm:flex-row">
                 <button
