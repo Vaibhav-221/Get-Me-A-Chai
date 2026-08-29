@@ -4,13 +4,14 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from 'react';
-import {fetchuser, userProfile} from "../../../actions/useractions";
+import {fetchuser, updateProfile} from "../../../actions/useractions";
 
 
 const Dashboard = () => {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   // Form state — holds all dashboard fields
   const [form, setForm] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     if (!session) {
@@ -24,16 +25,16 @@ const Dashboard = () => {
 
   const getData = async () => {
         let u = await fetchuser(session.user.name)
-        setform(u)
+        setForm(u)
     }
 
   // Single handler for all inputs — uses name attribute to update correct field
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handlesubmit = async (e) => {
+  const handlesubmit = async () => {
+    let a = await updateProfile(form, session.user.name)
     update()
-    let a = await updateProfile(e, session.user.name)
     alert("Profile Updated Successfully")
 
   }
@@ -45,7 +46,7 @@ const Dashboard = () => {
         Welcome to your Dashboard
       </h1>
 
-      <div className="max-w-xl mx-auto bg-[#1e1b4b]/60 border border-violet-900 rounded-xl p-4 sm:p-6 space-y-4" action={handlesubmit}>
+      <div className="max-w-xl mx-auto bg-[#1e1b4b]/60 border border-violet-900 rounded-xl p-4 sm:p-6 space-y-4" >
 
         {/* Name */}
         <div>
@@ -139,7 +140,7 @@ const Dashboard = () => {
         </div>
 
         {/* Save button — you'll add the submit handler yourself */}
-        <button className="w-full bg-gradient-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition">
+        <button className="w-full bg-gradient-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition" onClick={handlesubmit} >
           Save
         </button>
 
