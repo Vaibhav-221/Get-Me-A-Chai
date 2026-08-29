@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import {useRouter} from "next/navigation";
 
 const PaymentPage = ({ username }) => {
-  const [paymentform, setPaymentForm] = useState({});
+  const [paymentform, setPaymentForm] = useState({name :"", message: "", amount: ""});
   const [razorpayReady, setRazorpayReady] = useState(false);
   const [paymentError, setPaymentError] = useState("");
   const [currentuser, setcurrentuser] = useState({});
