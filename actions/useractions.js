@@ -6,27 +6,34 @@ import User from "@/app/Model/User"
 
 export const initiate = async (amount, to_username, paymentform) => {
     await connectDb()
-    console.log("API_KEY on server:", process.env.API_KEY) 
 
-var instance = new Razorpay({ key_id: process.env.API_KEY, key_secret: process.env.KEY_SECRET })
+    // Fetch the creator who is receiving payment, to use THEIR Razorpay account
+    let user = await User.findOne({ username: to_username })
+    if (!user?.razorpayid || !user?.razorpaysecret) {
+        return { error: "Creator has not configured Razorpay yet" }
+    }
 
+    var instance = new Razorpay({
+        key_id: user.razorpayid,
+        key_secret: user.razorpaysecret
+    })
 
-let options = {
-    amount: Number.parseInt(amount),
-    currency: "INR",
-}
+    let options = {
+        amount: Number.parseInt(amount),
+        currency: "INR",
+    }
 
-let x = await instance.orders.create(options)
+    let x = await instance.orders.create(options)
 
-await Payment.create({
-    oid: x.id,
-    amount: amount,
-    to_user: to_username,
-    name: paymentform.name,
-    message: paymentform.message,
-})
+    await Payment.create({
+        oid: x.id,
+        amount: amount,
+        to_user: to_username,
+        name: paymentform.name,
+        message: paymentform.message,
+    })
 
-return {...x, key: process.env.API_KEY}
+    return { ...x, key: user.razorpayid }
 }
 
 export const fetchuser = async (username) => {
@@ -38,24 +45,23 @@ export const fetchuser = async (username) => {
 
 export const fetchpayments = async (username) => {
     await connectDb()
-    // find all payments sorted by decreasing order of amount and flatten object ids
-    let p = await Payment.find({ to_user: username, done:true }).sort({ amount: -1 }).limit(10).lean()
+    let p = await Payment.find({ to_user: username, done: true }).sort({ amount: -1 }).limit(10).lean()
     return p
 }
 
 export const updateProfile = async (data, oldusername) => {
     await connectDb()
-    let ndata = data   // already a plain object, no conversion needed
+    let ndata = data
 
     if (oldusername !== ndata.username) {
         let u = await User.findOne({ username: ndata.username })
         if (u) {
             return { error: "Username already exists" }
-        }   
-        await User.updateOne({email: ndata.email}, ndata)
-        await Payment.updateMany({to_user: oldusername}, {to_user: ndata.username})
+        }
+        await User.updateOne({ email: ndata.email }, ndata)
+        await Payment.updateMany({ to_user: oldusername }, { to_user: ndata.username })
     }
     else {
-        await User.updateOne({email: ndata.email}, ndata)
+        await User.updateOne({ email: ndata.email }, ndata)
     }
 }
