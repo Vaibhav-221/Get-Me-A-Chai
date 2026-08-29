@@ -38,11 +38,35 @@ const Dashboard = () => {
   const handlesubmit = async () => {
     let a = await updateProfile(form, session.user.name)
     update()
-    alert("Profile Updated Successfully")
+     toast("Profile updated successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
 
   }
 
   return (
+    <>
+    <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
     <div className="min-h-screen bg-[#0f172a] text-white px-4 py-8">
 
       <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8">
@@ -149,6 +173,7 @@ const Dashboard = () => {
 
       </div>
     </div>
+    </>
   );
 };
 
