@@ -3,6 +3,11 @@ import React from "react";
 import { initiate } from "../../../actions/useractions";
 import { useEffect, useState } from "react";
 import { fetchuser, fetchpayments } from "../../../actions/useractions";
+import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
+
 
 const PaymentPage = ({ username }) => {
   const [paymentform, setPaymentForm] = useState({});
@@ -10,6 +15,23 @@ const PaymentPage = ({ username }) => {
   const [paymentError, setPaymentError] = useState("");
   const [currentuser, setcurrentuser] = useState({});
   const [payments, setpayments] = useState([]);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("paymentdone") == "true") {
+      toast("Thanks for your donation!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (window.Razorpay) {
@@ -93,6 +115,8 @@ const PaymentPage = ({ username }) => {
   useEffect(() => {
     getData();
   }, [username]);
+
+  // To Disable the form for the undefined credential
   const isInvalid =
     !paymentform.name ||
     paymentform.name.length < 3 ||
@@ -105,6 +129,19 @@ const PaymentPage = ({ username }) => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="min-h-screen bg-[#0f172a] text-white">
         {/* ===== Banner ===== */}
         <div className="h-40 sm:h-52 md:h-64 w-full bg-linear-to-r from-purple-700 via-violet-800 to-indigo-900" />
