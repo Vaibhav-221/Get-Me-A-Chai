@@ -15,3 +15,9 @@ const UserProfile = async ({ params }) => {
 };
 
 export default UserProfile;
+
+export async function generateMetadata({ params }) {
+  return {
+    title: `Support ${params.username} - Get Me A Chai`,
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 
+
 // ===== About Page — Get Me A Chai =====
 // Color palette matches the rest of the app:
 //   Background:      #0f172a (slate-950-ish navy)
@@ -48,6 +49,7 @@ const steps = [
 
 const AboutPage = () => {
   return (
+    <>
     <div className="min-h-screen bg-[#0f172a] text-white">
       {/* ===== Banner ===== */}
       <div className="h-40 sm:h-52 md:h-64 w-full bg-linear-to-r from-purple-700 via-violet-800 to-indigo-900 flex items-center justify-center px-4">
@@ -148,7 +150,9 @@ const AboutPage = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
 export default AboutPage;
+
