@@ -173,7 +173,7 @@ var rzp1 = new Razorpay(options);
               {paymentError && <p className="text-sm text-red-300" role="alert">{paymentError}</p>}
 
               {/* Pay button */}
-              <button type="button" disabled={!razorpayReady} onClick={() => pay(Number(paymentform.amount))} className="w-full bg-linear-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-50">
+              <button type="button" disabled={!razorpayReady} onClick={() => pay(Number.parseInt(paymentform.amount) *100)} className="w-full bg-linear-to-r from-purple-600 to-violet-600 rounded-md py-2 font-semibold hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-50">
                 Pay
               </button>
 
