@@ -70,7 +70,7 @@ const Dashboard = () => {
             value={form.profile ? form.profile : ""}
             onChange={handleChange}
             type="text"
-            name="profile"
+            name="profilepic"
             id="profile"
             className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
           />
@@ -83,7 +83,7 @@ const Dashboard = () => {
             value={form.cover ? form.cover : ""}
             onChange={handleChange}
             type="text"
-            name="cover"
+            name="coverpic"
             id="cover"
             className="w-full bg-[#0f172a] border border-violet-800 rounded-md px-3 py-2 text-sm outline-none focus:border-violet-500"
           />
