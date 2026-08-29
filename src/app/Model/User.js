@@ -27,6 +27,8 @@ const userSchema = new Schema({
   }, updatedAt: {
     type: Date,
     default: Date.now
+  }, razorpayid: {
+    type: String,
   }, razorpaysecret: {
     type: String,
   }
