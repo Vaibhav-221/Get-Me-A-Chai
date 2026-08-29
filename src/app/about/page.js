@@ -50,6 +50,7 @@ const steps = [
 const AboutPage = () => {
   return (
     <>
+     <title>About - Get Me a Chai</title>
     <div className="min-h-screen bg-[#0f172a] text-white">
       {/* ===== Banner ===== */}
       <div className="h-40 sm:h-52 md:h-64 w-full bg-linear-to-r from-purple-700 via-violet-800 to-indigo-900 flex items-center justify-center px-4">

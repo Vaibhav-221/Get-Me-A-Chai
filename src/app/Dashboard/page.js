@@ -54,6 +54,7 @@ const Dashboard = () => {
 
   return (
     <>
+    <title>Dashboard - Get Me a Chai</title>
     <ToastContainer
         position="top-right"
         autoClose={5000}
