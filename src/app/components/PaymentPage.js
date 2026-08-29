@@ -159,10 +159,11 @@ const PaymentPage = ({ username }) => {
         <div className="text-center mt-4 px-4">
           <h1 className="text-xl sm:text-2xl font-bold"> {username} </h1>
           <p className="text-gray-400 mt-1 text-sm sm:text-base">
-            Creator bio goes here
+            Lets help {username} get a chai!
           </p>
           <p className="text-xs sm:text-sm text-gray-500 mt-2">
-            0 members · 0 posts
+            {payments.length} Payments · ₹
+            {payments.reduce((total, p) => total + p.amount, 0).toFixed(2)} raised
           </p>
         </div>
 
