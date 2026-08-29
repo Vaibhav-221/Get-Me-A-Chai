@@ -27,7 +27,7 @@ export const initiate = async (amount, to_username, paymentform) => {
 
     await Payment.create({
         oid: x.id,
-        amount: amount,
+        amount: amount / 100,
         to_user: to_username,
         name: paymentform.name,
         message: paymentform.message,
