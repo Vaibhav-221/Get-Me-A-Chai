@@ -2,22 +2,23 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import User from "@/app/Model/User";
 import connectDB from "@/app/db/connectdb";
+import GoogleProvider from "next-auth/providers/google";
 
-const buildGithubUserData = (user, profile) => {
+const buildUserData = (user, profile, provider) => {
   const email =
     user?.email ||
     profile?.email ||
-    `${profile?.login || user?.name || "github-user"}@github.local`;
+    `${profile?.login || user?.name || `${provider}-user`}@${provider}.local`;
 
   const usernameBase =
-    (user?.name || profile?.login || "github-user")
+    (user?.name || profile?.login || `${provider}-user`)
       .trim()
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "") || "github-user";
+      .replace(/^-+|-+$/g, "") || `${provider}-user`;
 
   return {
-    name: user?.name || profile?.login || "GitHub User",
+    name: user?.name || profile?.login || `${provider} User`,
     email,
     username: usernameBase,
   };
@@ -29,28 +30,40 @@ export const authOptions = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
   ],
 
   callbacks: {
     async signIn({ user, account, profile }) {
-      if (account?.provider === "github") {
+      if (account?.provider === "github" || account?.provider === "google") {
         await connectDB();
 
-        const githubUser = buildGithubUserData(user, profile);
+        const providerUser = buildUserData(user, profile, account.provider);
+
         let currentUser = await User.findOne({
-          $or: [{ email: githubUser.email }, { username: githubUser.username }],
+          $or: [
+            { email: providerUser.email },
+            { username: providerUser.username },
+          ],
         });
 
         if (!currentUser) {
           currentUser = await User.create({
-            name: githubUser.name,
-            email: githubUser.email,
-            username: githubUser.username,
+            name: providerUser.name,
+            email: providerUser.email,
+            username: providerUser.username,
           });
         } else {
-          currentUser.name = currentUser.name || githubUser.name;
-          currentUser.email = currentUser.email || githubUser.email;
-          currentUser.username = currentUser.username || githubUser.username;
+          currentUser.name = currentUser.name || providerUser.name;
+
+          currentUser.email = currentUser.email || providerUser.email;
+
+          currentUser.username = currentUser.username || providerUser.username;
+
           await currentUser.save();
         }
 
