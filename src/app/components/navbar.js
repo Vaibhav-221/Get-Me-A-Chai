@@ -24,6 +24,16 @@ export default function Navbar() {
             About
           </Link>
 
+          {/* Only visible when logged out — disappears once session exists */}
+          {!session && (
+            <Link
+              href="/"
+              className="hidden sm:inline-block text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
+            >
+              Home
+            </Link>
+          )}
+
           {session && (
             <>
               <div className="relative">
