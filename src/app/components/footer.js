@@ -7,7 +7,7 @@ export default function Footer() {
 
       <p className="mt-1 text-xs sm:text-sm text-zinc-600">
         Designed & Developed by{" "}
-        <span className="font-semibold text-zinc-400">Vaibhav Singh</span>
+        <span className="font-semibold text-amber-500"> <a href="https://www.linkedin.com/in/vaibhav-singh-a9200a2b9"> Vaibhav Singh</a> </span>
       </p>
     </footer>
   );
