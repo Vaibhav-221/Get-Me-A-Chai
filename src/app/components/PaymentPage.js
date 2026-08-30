@@ -158,7 +158,11 @@ const PaymentPage = ({ username }) => {
     {/* ===== Avatar ===== */}
     <div className="relative z-10 flex justify-center -mt-20 sm:-mt-16">
       <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-zinc-900 border-4 border-zinc-950 ring-2 ring-amber-500/30 flex items-center justify-center text-3xl sm:text-4xl font-bold text-amber-400">
-        {username?.charAt(0).toUpperCase() || "U"}
+        <img
+  src={currentuser.profilepic}
+  alt={username}
+  className="w-full h-full rounded-full object-cover"
+/>
       </div>
     </div>
 
