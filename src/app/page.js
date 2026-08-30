@@ -2,131 +2,212 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <>
-      <div className="uppebody flex flex-col h-[35vh] justify-center items-center">
-        <div className="title text-5xl font-bold"> Get Me a Chai</div>
-        <div className="text-slate-400 pt-3 py-5">
-          Get-Me-A-Chai is a Next.js-based platform where creators can receive
-          small monetary support from their audience via a simple, shareable
-          profile page — inspired by 'Buy Me a Coffee.
-        </div>
-        <div className="buttons gap-4 pt-3 flex">
-          <Link href="login">
-            <button
-              type="button"
-              className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 border-0 rounded-xl flex gap-1 cursor-pointer"
-            >
-              <span>Start Now</span>
-              <svg
-                className="w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                />
-              </svg>
-            </button>
-          </Link>
-          <Link href="/about">
+   <>
+  {/* HERO */}
+  <div className="relative overflow-hidden bg-zinc-950">
+    {/* decorative glow blobs — purely visual, no logic */}
+    <div className="pointer-events-none absolute -top-32 -left-24 w-72 h-72 sm:w-96 sm:h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse [animation-duration:6s]"></div>
+    <div className="pointer-events-none absolute top-20 -right-16 w-64 h-64 sm:w-80 sm:h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse [animation-duration:8s]"></div>
+
+    <div className="relative flex flex-col min-h-[70vh] justify-center items-center px-5 text-center py-16">
+      <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-1.5 mb-6">
+        ☕ Support creators, one chai at a time
+      </span>
+
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-zinc-100 tracking-tight max-w-3xl">
+        Get Me a <span className="text-amber-400">Chai</span>
+      </h1>
+
+      <p className="text-zinc-400 pt-5 pb-3 max-w-xs sm:max-w-md md:max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed">
+        Get-Me-A-Chai is a Next.js-based platform where creators can receive
+        small monetary support from their audience via a simple, shareable
+        profile page — inspired by "Buy Me a Coffee." No middlemen, no
+        clutter — just your work and the people who want to back it.
+      </p>
+
+      <div className="buttons gap-3 sm:gap-4 pt-5 flex flex-col sm:flex-row w-full sm:w-auto">
+        <Link href="login" className="w-full sm:w-auto">
           <button
             type="button"
-            className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center cursor-pointer leading-5 border-0 rounded-xl"
+            className="w-full sm:w-auto justify-center text-zinc-950 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 font-semibold text-sm px-6 py-3 text-center leading-5 border-0 rounded-xl flex items-center gap-1.5 cursor-pointer transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg shadow-amber-500/20"
           >
-            Raad More
+            <span>Start Now</span>
+            <svg
+              className="w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              />
+            </svg>
           </button>
-          </Link>
-        </div>
-        {/* seperator and below content  */}
+        </Link>
+        <Link href="/about" className="w-full sm:w-auto">
+          <button
+            type="button"
+            className="w-full sm:w-auto justify-center text-zinc-100 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 font-semibold text-sm px-6 py-3 text-center cursor-pointer leading-5 rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-95"
+          >
+            Read More
+          </button>
+        </Link>
       </div>
-      <div className="border-t border-indigo-100/40 max-w-6xl mx-auto"></div>
 
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <h2 className="text-white text-3xl md:text-4xl font-bold text-center mb-12">
-          Your Fans can buy you a Chai
-        </h2>
+      <p className="text-zinc-500 text-xs sm:text-sm pt-6">
+        Free to start · Set up your page in minutes
+      </p>
+    </div>
+  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 - Laptop / Work */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-28 h-28 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6">
-              <svg
-                className="w-12 h-12 text-indigo-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"
-                />
-              </svg>
-            </div>
-            <h3 className="text-white font-semibold text-lg mb-2">
-              Fans want to help
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Your fans are available for you to help you
-            </p>
-          </div>
+  <div className="border-t border-zinc-800 max-w-6xl mx-auto"></div>
 
-          {/* Card 2 - Support / Ruler */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-28 h-28 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6">
-              <svg
-                className="w-12 h-12 text-indigo-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-white font-semibold text-lg mb-2">
-              Fans want to help
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Your fans are available for you to help you
-            </p>
-          </div>
+  {/* FEATURES */}
+  <div className="max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20 bg-zinc-950">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-zinc-100 text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+        Your fans can buy you a chai
+      </h2>
+      <p className="text-zinc-400 text-sm sm:text-base max-w-lg mx-auto">
+        Every creator starts somewhere small. GetMeAChai gives your
+        supporters an easy, direct way to say "thank you" — and gives you a
+        page you'll actually be proud to share.
+      </p>
+    </div>
 
-          {/* Card 3 - Community / People */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-28 h-28 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6">
-              <svg
-                className="w-12 h-12 text-indigo-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-white font-semibold text-lg mb-2">
-              Fans want to help
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Your fans are available for you to help you
-            </p>
-          </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+      {/* Card 1 */}
+      <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 sm:p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/30 hover:bg-zinc-900">
+        <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 text-2xl transition-transform duration-300 group-hover:scale-110">
+          ☕
         </div>
+        <h3 className="text-zinc-100 font-semibold text-lg mb-2">
+          Fans want to help
+        </h3>
+        <p className="text-zinc-400 text-sm leading-relaxed">
+          Your audience is already rooting for you. Give them a real,
+          frictionless way to show it — a single chai at a time.
+        </p>
       </div>
-    </>
+
+      {/* Card 2 */}
+      <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 sm:p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900">
+        <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-5 text-2xl transition-transform duration-300 group-hover:scale-110">
+          ⚡
+        </div>
+        <h3 className="text-zinc-100 font-semibold text-lg mb-2">
+          Live in minutes
+        </h3>
+        <p className="text-zinc-400 text-sm leading-relaxed">
+          Sign up, personalize your profile, and share your link. No
+          approvals, no waiting, no complicated setup.
+        </p>
+      </div>
+
+      {/* Card 3 */}
+      <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 sm:p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/30 hover:bg-zinc-900 sm:col-span-2 md:col-span-1">
+        <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center mb-5 text-2xl transition-transform duration-300 group-hover:scale-110">
+          🌍
+        </div>
+        <h3 className="text-zinc-100 font-semibold text-lg mb-2">
+          Built for community
+        </h3>
+        <p className="text-zinc-400 text-sm leading-relaxed">
+          Every supporter shows up on your public page — a visible, growing
+          record of the people backing your work.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div className="border-t border-zinc-800 max-w-6xl mx-auto"></div>
+
+  {/* HOW IT WORKS */}
+  <div className="max-w-5xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <h2 className="text-zinc-100 text-2xl sm:text-3xl font-bold text-center mb-12 sm:mb-16">
+      How it works
+    </h2>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 relative">
+      {/* connecting line on desktop */}
+      <div className="hidden md:block absolute top-6 left-[16.5%] right-[16.5%] h-px bg-zinc-800"></div>
+
+      {[
+        {
+          step: "01",
+          title: "Create your page",
+          desc: "Sign up and set up your profile in a few clicks — no code required.",
+          color: "amber",
+        },
+        {
+          step: "02",
+          title: "Share your link",
+          desc: "Drop it in your bio, videos, or newsletter so fans always know where to find you.",
+          color: "emerald",
+        },
+        {
+          step: "03",
+          title: "Get supported",
+          desc: "Receive chai from your fans and watch your supporter wall grow.",
+          color: "sky",
+        },
+      ].map((item) => (
+        <div key={item.step} className="relative flex flex-col items-center text-center">
+          <div
+            className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm mb-5 border relative z-10 bg-zinc-950 ${
+              item.color === "amber"
+                ? "border-amber-500/40 text-amber-400"
+                : item.color === "emerald"
+                ? "border-emerald-500/40 text-emerald-400"
+                : "border-sky-500/40 text-sky-400"
+            }`}
+          >
+            {item.step}
+          </div>
+          <h3 className="text-zinc-100 font-semibold text-base sm:text-lg mb-2">
+            {item.title}
+          </h3>
+          <p className="text-zinc-400 text-sm max-w-[16rem]">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="border-t border-zinc-800 max-w-6xl mx-auto"></div>
+
+  {/* TESTIMONIAL */}
+  <div className="max-w-3xl mx-auto px-5 sm:px-6 py-16 sm:py-20 text-center">
+    <div className="text-amber-400 text-4xl mb-4">"</div>
+    <p className="text-zinc-200 text-lg sm:text-xl font-medium leading-relaxed mb-5">
+      Setting up my page took less time than making my morning chai. My
+      followers finally have a simple way to support what I make.
+    </p>
+    <p className="text-zinc-500 text-sm">— A creator using GetMeAChai</p>
+  </div>
+
+  {/* FINAL CTA */}
+  <div className="max-w-6xl mx-auto px-5 sm:px-6 pb-16 sm:pb-20">
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-500 to-orange-600 px-6 sm:px-12 py-12 sm:py-16 text-center">
+      <div className="pointer-events-none absolute -bottom-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+      <h2 className="text-zinc-950 text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+        Ready to get your first chai?
+      </h2>
+      <p className="text-zinc-900/80 text-sm sm:text-base max-w-md mx-auto mb-7">
+        Join creators who've turned casual support into something real.
+      </p>
+      <Link href="login">
+        <button
+          type="button"
+          className="bg-zinc-950 text-zinc-100 hover:bg-zinc-900 font-semibold text-sm px-7 py-3 rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer"
+        >
+          Start Now — It's Free
+        </button>
+      </Link>
+    </div>
+  </div>
+</>
   );
 }
