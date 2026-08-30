@@ -7,10 +7,14 @@ import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const PaymentPage = ({ username }) => {
-  const [paymentform, setPaymentForm] = useState({name :"", message: "", amount: ""});
+  const [paymentform, setPaymentForm] = useState({
+    name: "",
+    message: "",
+    amount: "",
+  });
   const [razorpayReady, setRazorpayReady] = useState(false);
   const [paymentError, setPaymentError] = useState("");
   const [currentuser, setcurrentuser] = useState({});
@@ -21,19 +25,20 @@ const PaymentPage = ({ username }) => {
   useEffect(() => {
     if (searchParams.get("paymentdone") == "true") {
       toast("Profile updated successfully!", {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "dark",
-  transition: Bounce,
-  icon: "☕",
-  className: "!bg-zinc-900 !text-zinc-100 !border !border-zinc-800 !rounded-xl",
-  progressClassName: "!bg-amber-500",
-});
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        icon: "☕",
+        className:
+          "!bg-zinc-900 !text-zinc-100 !border !border-zinc-800 !rounded-xl",
+        progressClassName: "!bg-amber-500",
+      });
     }
     router.push(`/${username}`);
   }, []);
@@ -134,184 +139,206 @@ const PaymentPage = ({ username }) => {
 
   return (
     <>
-  <ToastContainer
-    position="top-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick={false}
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="dark"
-    transition={Bounce}
-  />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
 
-  <div className="min-h-screen bg-zinc-950 text-zinc-100">
-    {/* ===== Banner ===== */}
-    <div className="relative overflow-hidden h-40 sm:h-52 md:h-64 w-full rounded-b-3xl bg-gradient-to-r from-amber-500 to-orange-600">
-      <div className="pointer-events-none absolute -top-14 -left-10 w-56 h-56 bg-white/10 rounded-full blur-3xl animate-pulse [animation-duration:5s]"></div>
-      <div className="pointer-events-none absolute -bottom-14 -right-10 w-56 h-56 bg-white/10 rounded-full blur-3xl animate-pulse [animation-duration:7s]"></div>
-    </div>
+      <div className="min-h-screen bg-zinc-950 text-zinc-100">
+        {/* ===== Banner ===== */}
+        <div
+          className={`relative overflow-hidden h-40 sm:h-52 md:h-64 w-full rounded-b-3xl ${
+            !currentuser.coverpic
+              ? "bg-gradient-to-r from-amber-500 to-orange-600"
+              : ""
+          }`}
+        >
+          {/* Dynamic cover image — only rendered when one exists */}
+          {currentuser.coverpic && (
+            <img
+              src={currentuser.coverpic}
+              alt="Cover"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
 
-    {/* ===== Avatar ===== */}
-    <div className="relative z-10 flex justify-center -mt-20 sm:-mt-16">
-      <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-zinc-900 border-4 border-zinc-950 ring-2 ring-amber-500/30 flex items-center justify-center text-3xl sm:text-4xl font-bold text-amber-400">
-        <img
-  src={currentuser.profilepic}
-  alt={username}
-  className="w-full h-full rounded-full object-cover"
-/>
-      </div>
-    </div>
-
-    {/* ===== Creator Info ===== */}
-    <div className="text-center mt-4 px-4">
-      <h1 className="text-xl sm:text-2xl font-bold">{username}</h1>
-      <p className="text-zinc-400 mt-1 text-sm sm:text-base">
-        Let's help {username} get a chai!
-      </p>
-      <p className="text-xs sm:text-sm text-zinc-500 mt-2">
-        {payments.length} Payments · ₹
-        {payments.reduce((total, p) => total + p.amount, 0).toFixed(2)} raised
-      </p>
-    </div>
-
-    {/* ===== Main Content: Supporters + Payment ===== */}
-    <div className="max-w-5xl mx-auto mt-10 px-4 grid grid-cols-1 md:grid-cols-2 gap-6 pb-16">
-      {/* ---- Supporters Card ---- */}
-      <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4 sm:p-6">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-lg">👥</span>
-          <h2 className="text-lg sm:text-xl font-semibold">Supporters</h2>
+          <div className="pointer-events-none absolute -top-14 -left-10 w-56 h-56 bg-white/10 rounded-full blur-3xl animate-pulse [animation-duration:5s]"></div>
+          <div className="pointer-events-none absolute -bottom-14 -right-10 w-56 h-56 bg-white/10 rounded-full blur-3xl animate-pulse [animation-duration:7s]"></div>
         </div>
-        <p className="text-zinc-500 text-xs sm:text-sm mb-4">
-          Everyone who's chipped in a chai so far
-        </p>
 
-        <div className="space-y-3">
-          {payments.length === 0 ? (
-            <p className="text-sm text-zinc-400">
-              No supporters yet. Be the first to support!
+        {/* ===== Avatar ===== */}
+        <div className="relative z-10 flex justify-center -mt-20 sm:-mt-16">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-zinc-900 border-4 border-zinc-950 ring-2 ring-amber-500/30 flex items-center justify-center text-3xl sm:text-4xl font-bold text-amber-400">
+            {currentuser.profilepic ? (
+              <img
+                src={currentuser.profilepic}
+                alt={username}
+                className="w-full h-full rounded-full object-cover"
+              />
+            ) : (
+              <span>{username?.charAt(0).toUpperCase()}</span>
+            )}
+          </div>
+        </div>
+
+        {/* ===== Creator Info ===== */}
+        <div className="text-center mt-4 px-4">
+          <h1 className="text-xl sm:text-2xl font-bold">{username}</h1>
+          <p className="text-zinc-400 mt-1 text-sm sm:text-base">
+            Let's help {username} get a chai!
+          </p>
+          <p className="text-xs sm:text-sm text-zinc-500 mt-2">
+            {payments.length} Payments · ₹
+            {payments.reduce((total, p) => total + p.amount, 0).toFixed(2)}{" "}
+            raised
+          </p>
+        </div>
+
+        {/* ===== Main Content: Supporters + Payment ===== */}
+        <div className="max-w-5xl mx-auto mt-10 px-4 grid grid-cols-1 md:grid-cols-2 gap-6 pb-16">
+          {/* ---- Supporters Card ---- */}
+          <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4 sm:p-6">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">👥</span>
+              <h2 className="text-lg sm:text-xl font-semibold">Supporters</h2>
+            </div>
+            <p className="text-zinc-500 text-xs sm:text-sm mb-4">
+              Everyone who's chipped in a chai so far
             </p>
-          ) : (
-            payments.map((p, index) => (
-              <div
-                key={index}
-                className="bg-zinc-950/60 border border-zinc-800/60 rounded-lg p-3 flex items-start gap-3 transition-colors hover:border-zinc-700"
-              >
-                <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-sm font-semibold text-zinc-950 shrink-0">
-                  {p.name?.charAt(0).toUpperCase() || "A"}
-                </div>
-                <p className="text-sm text-zinc-300">
-                  <span className="font-semibold text-zinc-100">
-                    {p.name}{" "}
-                  </span>
-                  donated {p.amount}
-                  <span> with the message </span> — "{p.message}"
+
+            <div className="space-y-3">
+              {payments.length === 0 ? (
+                <p className="text-sm text-zinc-400">
+                  No supporters yet. Be the first to support!
                 </p>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
+              ) : (
+                payments.map((p, index) => (
+                  <div
+                    key={index}
+                    className="bg-zinc-950/60 border border-zinc-800/60 rounded-lg p-3 flex items-start gap-3 transition-colors hover:border-zinc-700"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-sm font-semibold text-zinc-950 shrink-0">
+                      {p.name?.charAt(0).toUpperCase() || "A"}
+                    </div>
+                    <p className="text-sm text-zinc-300">
+                      <span className="font-semibold text-zinc-100">
+                        {p.name}{" "}
+                      </span>
+                      donated {p.amount}
+                      <span> with the message </span> — "{p.message}"
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
 
-      {/* ---- Payment Card ---- */}
-      <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4 sm:p-6">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-lg">☕</span>
-          <h2 className="text-lg sm:text-xl font-semibold">Make a payment</h2>
-        </div>
-        <p className="text-zinc-500 text-xs sm:text-sm mb-4">
-          Choose an amount below, or enter your own — every bit helps.
-        </p>
-
-        <div className="space-y-3">
-          {/* Name input */}
-          <input
-            placeholder="Enter Name"
-            onChange={handleChange}
-            value={paymentform.name}
-            name="name"
-            required
-            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 transition-colors"
-          />
-
-          {/* Message input */}
-          <input
-            placeholder="Enter Message"
-            onChange={handleChange}
-            value={paymentform.message}
-            name="message"
-            required
-            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 transition-colors"
-          />
-
-          {/* Amount input */}
-          <input
-            placeholder="Enter Amount"
-            type="number"
-            min="1"
-            onChange={handleChange}
-            value={paymentform.amount}
-            name="amount"
-            required
-            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 transition-colors"
-          />
-
-          {paymentError && (
-            <p className="text-sm text-red-400" role="alert">
-              {paymentError}
+          {/* ---- Payment Card ---- */}
+          <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4 sm:p-6">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">☕</span>
+              <h2 className="text-lg sm:text-xl font-semibold">
+                Make a payment
+              </h2>
+            </div>
+            <p className="text-zinc-500 text-xs sm:text-sm mb-4">
+              Choose an amount below, or enter your own — every bit helps.
             </p>
-          )}
 
-          {/* Pay button */}
-          <button
-            type="button"
-            disabled={isDisabled}
-            onClick={() => pay(Number.parseInt(paymentform.amount) * 100)}
-            className={`w-full rounded-lg py-2.5 font-semibold transition-all duration-300 ${
-              isDisabled
-                ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
-                : "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-zinc-950 hover:scale-[1.01] active:scale-[0.99]"
-            }`}
-          >
-            Pay
-          </button>
+            <div className="space-y-3">
+              {/* Name input */}
+              <input
+                placeholder="Enter Name"
+                onChange={handleChange}
+                value={paymentform.name}
+                name="name"
+                required
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 transition-colors"
+              />
 
-          {/* Quick-pay preset buttons */}
-          <div className="flex flex-col xs:flex-row gap-2 pt-1 sm:flex-row">
-            <button
-              onClick={() => {
-                pay(1000);
-              }}
-              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-1.5 text-sm hover:border-amber-500/40 hover:bg-zinc-900 transition-colors"
-            >
-              Pay ₹10
-            </button>
-            <button
-              onClick={() => {
-                pay(2000);
-              }}
-              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-1.5 text-sm hover:border-amber-500/40 hover:bg-zinc-900 transition-colors"
-            >
-              Pay ₹20
-            </button>
-            <button
-              onClick={() => {
-                pay(3000);
-              }}
-              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-1.5 text-sm hover:border-amber-500/40 hover:bg-zinc-900 transition-colors"
-            >
-              Pay ₹30
-            </button>
+              {/* Message input */}
+              <input
+                placeholder="Enter Message"
+                onChange={handleChange}
+                value={paymentform.message}
+                name="message"
+                required
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 transition-colors"
+              />
+
+              {/* Amount input */}
+              <input
+                placeholder="Enter Amount"
+                type="number"
+                min="1"
+                onChange={handleChange}
+                value={paymentform.amount}
+                name="amount"
+                required
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 transition-colors"
+              />
+
+              {paymentError && (
+                <p className="text-sm text-red-400" role="alert">
+                  {paymentError}
+                </p>
+              )}
+
+              {/* Pay button */}
+              <button
+                type="button"
+                disabled={isDisabled}
+                onClick={() => pay(Number.parseInt(paymentform.amount) * 100)}
+                className={`w-full rounded-lg py-2.5 font-semibold transition-all duration-300 ${
+                  isDisabled
+                    ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-zinc-950 hover:scale-[1.01] active:scale-[0.99]"
+                }`}
+              >
+                Pay
+              </button>
+
+              {/* Quick-pay preset buttons */}
+              <div className="flex flex-col xs:flex-row gap-2 pt-1 sm:flex-row">
+                <button
+                  onClick={() => {
+                    pay(1000);
+                  }}
+                  className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-1.5 text-sm hover:border-amber-500/40 hover:bg-zinc-900 transition-colors"
+                >
+                  Pay ₹10
+                </button>
+                <button
+                  onClick={() => {
+                    pay(2000);
+                  }}
+                  className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-1.5 text-sm hover:border-amber-500/40 hover:bg-zinc-900 transition-colors"
+                >
+                  Pay ₹20
+                </button>
+                <button
+                  onClick={() => {
+                    pay(3000);
+                  }}
+                  className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-1.5 text-sm hover:border-amber-500/40 hover:bg-zinc-900 transition-colors"
+                >
+                  Pay ₹30
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</>
+    </>
   );
 };
 
