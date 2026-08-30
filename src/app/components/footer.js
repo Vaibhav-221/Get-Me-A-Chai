@@ -1,13 +1,13 @@
 export default function Footer() {
   return (
-    <footer className="border-t py-4 text-center text-gray-600">
-      <p>
+    <footer className="border-t border-zinc-800 bg-zinc-950 py-6 px-5 text-center">
+      <p className="text-sm text-zinc-500">
         © {new Date().getFullYear()} GetMeAChai. All rights reserved.
       </p>
 
-      <p className="mt-1 text-sm">
+      <p className="mt-1 text-xs sm:text-sm text-zinc-600">
         Designed & Developed by{" "}
-        <span className="font-semibold">Vaibhav Singh</span>
+        <span className="font-semibold text-zinc-400">Vaibhav Singh</span>
       </p>
     </footer>
   );
